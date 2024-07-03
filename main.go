@@ -40,6 +40,8 @@ var firestoreClient *firestore.Client
 var youtubeClient *youtube.Service
 
 const prettyDateFormat = "January 2, 2006"
+const hup = "https://tenor.com/view/kitten-cat-jump-running-cute-gif-21817165"
+const hUP = "https://storage.googleapis.com/musicmonth/hUP.gif"
 
 type month struct {
 	StartTime time.Time `json:"start_time"`
@@ -269,14 +271,23 @@ var (
 		},
 		"hup": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			up := rand.Intn(100)
-			gif := "https://tenor.com/view/kitten-cat-jump-running-cute-gif-21817165"
+			gif := hup
 			if up < 5 {
-				gif = "https://storage.googleapis.com/musicmonth/hUP.gif"
+				gif = hUP
 			}
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionApplicationCommandResponseData{
 					Content: gif,
+				},
+			})
+		},
+		"latersluts": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			gif := "https://storage.googleapis.com/musicmonth/hUP.gif"
+			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+				Type: discordgo.InteractionResponseChannelMessageWithSource,
+				Data: &discordgo.InteractionApplicationCommandResponseData{
+					Content: hUP,
 				},
 			})
 		},
