@@ -309,7 +309,7 @@ var (
 			s.GuildMemberRoleAdd(i.GuildID, i.Member.User.ID, role.ID)
 		},
 		"removerole": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			role := i.ApplicationCommandData().Options[0].RoleValue(nil, "")
+			role := i.ApplicationCommandData().Options[0].RoleValue(s, i.GuildID)
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
